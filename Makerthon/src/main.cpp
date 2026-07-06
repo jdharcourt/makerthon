@@ -1,6 +1,6 @@
 #include <Arduino.h>
 
-#define LED_PIN 2
+#define LED_PIN 13
 
 #define DOT_MS   200
 #define DASH_MS  600
