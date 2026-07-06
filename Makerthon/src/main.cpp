@@ -1,18 +1,58 @@
 #include <Arduino.h>
 
-// put function declarations here:
-int myFunction(int, int);
+#define LED_PIN 13
+
+#define DOT_MS   200
+#define DASH_MS  600
+#define SYMBOL_GAP_MS  200
+#define LETTER_GAP_MS  600
+#define WORD_GAP_MS   1400
+
+void dot() {
+  digitalWrite(LED_PIN, HIGH);
+  delay(DOT_MS);
+  digitalWrite(LED_PIN, LOW);
+  delay(SYMBOL_GAP_MS);
+}
+
+void dash() {
+  digitalWrite(LED_PIN, HIGH);
+  delay(DASH_MS);
+  digitalWrite(LED_PIN, LOW);
+  delay(SYMBOL_GAP_MS);
+}
+
+void letterGap() {
+  delay(LETTER_GAP_MS - SYMBOL_GAP_MS); // subtract the trailing symbol gap already applied
+}
+
+void wordGap() {
+  delay(WORD_GAP_MS - SYMBOL_GAP_MS);
+}
 
 void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+  pinMode(LED_PIN, OUTPUT);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-}
+  // P: .--.
+  dot(); dash(); dash(); dot();
+  letterGap();
 
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+  // A: .-
+  dot(); dash();
+  letterGap();
+
+  // T: -
+  dash();
+  letterGap();
+
+  // C: -.-.
+  dash(); dot(); dash(); dot();
+  letterGap();
+
+  // H: ....
+  dot(); dot(); dot(); dot();
+
+  wordGap();
 }
